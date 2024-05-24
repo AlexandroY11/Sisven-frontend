@@ -55,7 +55,48 @@
             }
         },
         methods:{
-            
+            deleteCustomer(codigo) {
+                Swal.fire({
+                    title: "Are you sure you want to delete it?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios.delete(`http://localhost:8000/api/customers/${codigo}`)
+                            .then(response => {
+                                if (response.data.success) {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "Your file has been deleted.",
+                                        icon: "success"
+                                    });
+                                    this.customers = response.data.customers;
+                                } else {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: 'Customer can not be deleted, because is used as a customer in a invoice',
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                let message = 'An error occurred while trying to delete the customer.';
+                                if (error.response && error.response.data && error.response.data.message) {
+                                    message = error.response.data.message;
+                                }
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "Customer can not be deleted, because is used as a customer in a invoice",
+                                    icon: "error"
+                                });
+                            });
+                    }
+                });
+            },
             editCustomer(id){
                 this.$router.push({name: "EditarCustomer", params: {id: `${id}`}})
             },
