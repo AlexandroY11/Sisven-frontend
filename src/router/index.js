@@ -6,6 +6,9 @@ import EditarCategory from '@/components/categories/EditarCategory.vue'
 import Paymodes from '@/views/Paymodes.vue'
 import NewPaymode from '@/components/paymodes/NewPaymode.vue'
 import EditarPaymode from '@/components/paymodes/EditarPaymode.vue'
+import Products from '@/views/Products.vue'
+import NewProduct from '@/components/products/NewProduct.vue'
+import EditarProduct from '@/components/products/EditarProduct.vue'
 
 const routes = [
   {
@@ -42,6 +45,21 @@ const routes = [
     path: '/editar-paymode/:id',
     name: 'EditarPaymode',
     component: EditarPaymode
+  },
+  {
+    path: '/products',
+    name: 'Products',
+    component: Products
+  },
+  {
+    path: '/add-product',
+    name: 'NewProduct',
+    component: NewProduct
+  },
+  {
+    path: '/editar-product/:id',
+    name: 'EditarProduct',
+    component: EditarProduct
   },
   {
     path: '/about',
