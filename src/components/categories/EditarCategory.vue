@@ -8,7 +8,7 @@
                 Category
             </div>
             <div class="card-body">
-                <form @submit.prevent="updateComuna">
+                <form @submit.prevent="updateCategory">
                     <div class="row mb-3">
                         <label for="id">Code</label>
                         <div class="input-group">
@@ -65,7 +65,7 @@ export default {
             this.$router.push({name: 'Categories'})
         },
 
-        async updateComuna(){
+        async updateCategory(){
             try {
                 const res = await axios.put(`http://localhost:8000/api/categories/${this.category.id}`, this.category);
                 if (res.status == 200) {
