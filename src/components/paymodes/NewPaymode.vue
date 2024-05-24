@@ -5,16 +5,16 @@
         </h1>
         <div class="card">
             <div class="card-header fw-bold">
-                Category
+                Paymode
             </div>
             <div class="card-body">
-                <form @submit.prevent="saveCategory">
+                <form @submit.prevent="savePaymode">
                     <div class="row mb-3">
                         <label for="id">Code</label>
                         <div class="input-group">
                             <div class="input-group-text"><font-awesome-icon icon="tag" /></div>
-                            <input type="text" class="form-control" id="id" placeholder="Category code" disabled 
-                            v-model="category.id">
+                            <input type="text" class="form-control" id="id" placeholder="Paymode code" disabled 
+                            v-model="paymode.id">
                         </div>
                     </div>
                     
@@ -22,17 +22,17 @@
                         <label for="name">Name</label>
                         <div class="input-group">
                             <div class="input-group-text"><font-awesome-icon icon="building" /></div>
-                            <input type="text" class="form-control" id="name" placeholder="Category name"  
-                            v-model="category.name" required>
+                            <input type="text" class="form-control" id="name" placeholder="Paymode name"  
+                            v-model="paymode.name" required>
                         </div>
                     </div>
                     
                     <div class="row mb-3">
-                        <label for="description">Description</label>
+                        <label for="observation">Observation</label>
                         <div class="input-group">
                             <div class="input-group-text"><font-awesome-icon icon="bank" /></div>
-                            <textarea type="text" class="form-control" id="description" placeholder="Category description"  
-                            v-model="category.description" required></textarea>
+                            <textarea type="text" class="form-control" id="observation" placeholder="Paymode observation"  
+                            v-model="paymode.observation" required></textarea>
                         </div>
                     </div>
 
@@ -50,42 +50,42 @@ import axios from "axios"
 import Swal from "sweetalert2"
 
 export default {
-    name: "NewCategory",
+    name: "NewPaymode",
     data(){
         return{
-            category: {
+            paymode: {
                 id: 0,
                 name: '',
-                description: '',
+                observation: '',
             }
         }
     },
     methods: {
         cancelar() {
-            this.$router.push({ name: 'Categories' });
+            this.$router.push({ name: 'Paymodes' });
         },
 
-        async saveCategory() {
+        async savePaymode() {
             try {
-                const res = await axios.post('http://localhost:8000/api/categories', this.category);
+                const res = await axios.post('http://localhost:8000/api/paymodes', this.paymode);
 
                 if (res.status === 200) { 
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Category has been created successfully',
+                        title: 'Paymode has been created successfully',
                         showConfirmButton: false,
                         timer: 2000
                     }).then(() => {
-                        this.$router.push({ name: 'Categories' });
+                        this.$router.push({ name: 'Paymodes' });
                     });
                 }
             } catch (error) {
-                console.error('Error creating category:', error);
+                console.error('Error creating paymode:', error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'No se pudo crear la category. Por favor, intente de nuevo.',
+                    text: 'No se pudo crear la paymode. Por favor, intente de nuevo.',
                 });
             }
         }
