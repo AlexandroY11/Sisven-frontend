@@ -3,6 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import Categories from '@/views/Categories.vue'
 import NewCategory from '@/components/categories/NewCategory.vue'
 import EditarCategory from '@/components/categories/EditarCategory.vue'
+import Paymodes from '@/views/Paymodes.vue'
+import NewPaymode from '@/components/paymodes/NewPaymode.vue'
+import EditarPaymode from '@/components/paymodes/EditarPaymode.vue'
 
 const routes = [
   {
@@ -24,6 +27,21 @@ const routes = [
     path: '/editar-category/:id',
     name: 'EditarCategory',
     component: EditarCategory
+  },
+  {
+    path: '/paymodes',
+    name: 'Paymodes',
+    component: Paymodes
+  },
+  {
+    path: '/add-paymode',
+    name: 'NewPaymode',
+    component: NewPaymode
+  },
+  {
+    path: '/editar-paymode/:id',
+    name: 'EditarPaymode',
+    component: EditarPaymode
   },
   {
     path: '/about',
