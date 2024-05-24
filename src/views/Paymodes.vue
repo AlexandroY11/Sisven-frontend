@@ -47,7 +47,48 @@
             }
         },
         methods:{
-            
+            deletePaymode(codigo) {
+                Swal.fire({
+                    title: "Are you sure you want to delete it?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios.delete(`http://localhost:8000/api/paymodes/${codigo}`)
+                            .then(response => {
+                                if (response.data.success) {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "Your file has been deleted.",
+                                        icon: "success"
+                                    });
+                                    this.paymodes = response.data.paymodes;
+                                } else {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: 'Paymode can not be deleted, because is used as a paymode in a invoice',
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                let message = 'An error occurred while trying to delete the paymode.';
+                                if (error.response && error.response.data && error.response.data.message) {
+                                    message = error.response.data.message;
+                                }
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "Paymode can not be deleted, because is used as a paymode in a invoice",
+                                    icon: "error"
+                                });
+                            });
+                    }
+                });
+            },
             editPaymode(id){
                 this.$router.push({name: "EditarPaymode", params: {id: `${id}`}})
             },
